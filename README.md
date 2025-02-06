@@ -2,6 +2,8 @@
 
 ## required
 
+- [docker](https://docs.docker.com/compose/install/)
+- [docker compose](https://docs.docker.com/compose/install/)(version 1.9.0+)
 - [terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
 - [localstack](https://docs.localstack.cloud/getting-started/installation/)
 
@@ -13,6 +15,12 @@ AWS Access Key ID [****************este]: teste
 AWS Secret Access Key [****************este]: teste
 Default region name [sa-east-1]: us-east-1
 Default output format [None]:
+```
+
+Start localstack
+
+```shell
+docker compose up
 ```
 
 Run terraform
