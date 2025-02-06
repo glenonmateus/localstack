@@ -31,7 +31,7 @@ $ aws dynamodb list-tables --profile localstack --endpoint-url http://localhost:
 ```
 
 ```bash
-$EDITOR ~/.aws/config
+$ $EDITOR ~/.aws/config
 
 [profile localstack]
 region=us-east-1
