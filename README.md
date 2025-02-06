@@ -7,19 +7,13 @@
 
 [terraform + localstack](https://docs.localstack.cloud/user-guide/integrations/terraform/)
 
-```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
+```shell
+terraform plan
+terraform apply -auto-approve
+terraform destroy -auto-approve
 ```
 
-```bash
-tflocal plan
-tflocal apply -auto-approve
-tflocal destroy -auto-approve
-```
-
-```bash
+```shell
 $ aws configure --profile localstack
 AWS Access Key ID [****************este]: teste
 AWS Secret Access Key [****************este]: teste
@@ -30,19 +24,38 @@ $ aws s3api list-buckets --profile localstack --endpoint-url http://localhost:45
 $ aws dynamodb list-tables --profile localstack --endpoint-url http://localhost:4566
 ```
 
-```bash
-$ $EDITOR ~/.aws/config
+Optional: Add endpoint_url in localstack profile
+
+```shell
+$EDITOR ~/.aws/config
 
 [profile localstack]
 region=us-east-1
 output=json
-endpoint_url = http://localhost:4566
-
-$ aws s3api list-buckets --profile localstack
-$ aws dynamodb list-tables --profile localstack
+endpoint_url=http://localhost:4566
 ```
 
+```shell
+aws s3api list-buckets --profile localstack
+aws dynamodb list-tables --profile localstack
+```
+
+## test
+
+Configure dependencies
+
 ```bash
-awslocal s3api list-buckets
-awslocal dynamodb list-tables
+cd test
+go mod init "<MODULE_NAME>"
+go mod tidy
+```
+
+Where `<MODULE_NAME>` is the name of your module, typically in the format
+`github.com/<YOUR_USERNAME>/<YOUR_REPO_NAME>`.
+
+To run the tests:
+
+```bash
+cd test
+go test -v
 ```
