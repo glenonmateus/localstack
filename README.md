@@ -8,20 +8,27 @@
 [terraform + localstack](https://docs.localstack.cloud/user-guide/integrations/terraform/)
 
 ```shell
+aws configure --profile localstack
+AWS Access Key ID [****************este]: teste
+AWS Secret Access Key [****************este]: teste
+Default region name [sa-east-1]: us-east-1
+Default output format [None]:
+```
+
+Run terraform
+
+```shell
 terraform plan
 terraform apply -auto-approve
 terraform destroy -auto-approve
 ```
 
-```shell
-$ aws configure --profile localstack
-AWS Access Key ID [****************este]: teste
-AWS Secret Access Key [****************este]: teste
-Default region name [sa-east-1]: us-east-1
-Default output format [None]:
+Command samples localstack:
 
-$ aws s3api list-buckets --profile localstack --endpoint-url http://localhost:4566
-$ aws dynamodb list-tables --profile localstack --endpoint-url http://localhost:4566
+```shell
+aws --profile localstack --endpoint-url http://localhost:4566 s3api list-buckets
+aws --profile localstack --endpoint-url http://localhost:4566 dynamodb list-tables
+aws --profile localstack --endpoint-url http://localhost:4566 ec2 describe-instances
 ```
 
 Optional: Add endpoint_url in localstack profile
@@ -36,15 +43,16 @@ endpoint_url=http://localhost:4566
 ```
 
 ```shell
-aws s3api list-buckets --profile localstack
-aws dynamodb list-tables --profile localstack
+aws --profile localstack s3api list-buckets
+aws --profile localstack dynamodb list-tables
+aws --profile localstack ec2 describe-instances
 ```
 
 ## test
 
 Configure dependencies
 
-```bash
+```shell
 cd test
 go mod init "<MODULE_NAME>"
 go mod tidy
@@ -55,7 +63,7 @@ Where `<MODULE_NAME>` is the name of your module, typically in the format
 
 To run the tests:
 
-```bash
+```shell
 cd test
 go test -v
 ```
