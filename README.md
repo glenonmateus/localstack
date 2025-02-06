@@ -16,6 +16,7 @@ pip install -r requirements.txt
 ```bash
 tflocal plan
 tflocal apply -auto-approve
+tflocal destroy -auto-approve
 ```
 
 ```bash
@@ -28,4 +29,3 @@ Default output format [None]:
 $ aws s3api list-buckets --profile localstack --endpoint-url http://localhost:4566
 $ aws dynamodb list-tables --profile localstack --endpoint-url http://localhost:4566
 ```
-
