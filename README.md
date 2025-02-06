@@ -23,9 +23,26 @@ tflocal destroy -auto-approve
 $ aws configure --profile localstack
 AWS Access Key ID [****************este]: teste
 AWS Secret Access Key [****************este]: teste
-Default region name [sa-east-1]: sa-east-1
+Default region name [sa-east-1]: us-east-1
 Default output format [None]:
 
 $ aws s3api list-buckets --profile localstack --endpoint-url http://localhost:4566
 $ aws dynamodb list-tables --profile localstack --endpoint-url http://localhost:4566
+```
+
+```bash
+$EDITOR ~/.aws/config
+
+[profile localstack]
+region=us-east-1
+output=json
+endpoint_url = http://localhost:4566
+
+$ aws s3api list-buckets --profile localstack
+$ aws dynamodb list-tables --profile localstack
+```
+
+```bash
+awslocal s3api list-buckets
+awslocal dynamodb list-tables
 ```
