@@ -6,9 +6,29 @@ provider "aws" {
   skip_requesting_account_id  = true
   skip_metadata_api_check     = true
   endpoints {
-    dynamodb = "http://localhost:4566"
-    ec2      = "http://localhost:4566"
-    s3       = "http://s3.localhost.localstack.cloud:4566"
+    apigateway     = "http://localhost:4566"
+    apigatewayv2   = "http://localhost:4566"
+    cloudformation = "http://localhost:4566"
+    cloudwatch     = "http://localhost:4566"
+    dynamodb       = "http://localhost:4566"
+    ec2            = "http://localhost:4566"
+    es             = "http://localhost:4566"
+    elasticache    = "http://localhost:4566"
+    firehose       = "http://localhost:4566"
+    iam            = "http://localhost:4566"
+    kinesis        = "http://localhost:4566"
+    lambda         = "http://localhost:4566"
+    rds            = "http://localhost:4566"
+    redshift       = "http://localhost:4566"
+    route53        = "http://localhost:4566"
+    s3             = "http://s3.localhost.localstack.cloud:4566"
+    secretsmanager = "http://localhost:4566"
+    ses            = "http://localhost:4566"
+    sns            = "http://localhost:4566"
+    sqs            = "http://localhost:4566"
+    ssm            = "http://localhost:4566"
+    stepfunctions  = "http://localhost:4566"
+    sts            = "http://localhost:4566"
   }
 }
 
@@ -65,9 +85,23 @@ resource "aws_s3_bucket" "localstack" {
 }
 
 resource "aws_instance" "localstack" {
-  ami           = "ami-0c55b159cbfafe1f0"
-  instance_type = "t4g.small"
+  ami                    = "ami-0c55b159cbfafe1f0"
+  instance_type          = "t4g.small"
+  vpc_security_group_ids = [aws_security_group.localstack.id]
+  user_data              = <<EOF
+echo "Hello, World!" > index.html
+nohup busybox httpd -f -p 8080 &
+EOF
   tags = {
     Name = "HelloWorld"
+  }
+}
+
+resource "aws_security_group" "localstack" {
+  ingress {
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }
