@@ -5,11 +5,8 @@ provider "aws" {
   skip_credentials_validation = true
   skip_requesting_account_id  = true
   skip_metadata_api_check     = true
-  endpoints {
-    dynamodb = "http://localhost:4566"
-    s3       = "http://s3.localhost.localstack.cloud:4566"
-  }
 }
+
 terraform {
   required_version = ">= 1.10.5"
   required_providers {
@@ -20,7 +17,7 @@ terraform {
   }
 }
 
-resource "aws_dynamodb_table" "basic-dynamodb-table" {
+resource "aws_dynamodb_table" "localstack" {
   name           = "GameScores"
   billing_mode   = "PROVISIONED"
   read_capacity  = 20
@@ -53,11 +50,19 @@ resource "aws_dynamodb_table" "basic-dynamodb-table" {
     non_key_attributes = ["UserId"]
   }
   tags = {
-    Name        = "dynamodb-table-1"
+    Name        = "localstack"
     Environment = "production"
   }
 }
 
 resource "aws_s3_bucket" "localstack" {
   bucket = "localstack"
+}
+
+resource "aws_instance" "localstack" {
+  ami           = "ami-0c55b159cbfafe1f0"
+  instance_type = "t4g.small"
+  tags = {
+    Name = "HelloWorld"
+  }
 }
