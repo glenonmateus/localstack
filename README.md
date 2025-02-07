@@ -6,8 +6,7 @@
 - [docker compose](https://docs.docker.com/compose/install/)(version 1.9.0+)
 - [terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
 - [localstack](https://docs.localstack.cloud/getting-started/installation/)
-
-[terraform + localstack](https://docs.localstack.cloud/user-guide/integrations/terraform/)
+- [terraform + localstack](https://docs.localstack.cloud/user-guide/integrations/terraform/)
 
 ```shell
 aws configure --profile localstack
