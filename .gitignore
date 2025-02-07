@@ -1,4 +1,5 @@
 .venv
+volume/
 
 # Local .terraform directories
 **/.terraform/*
